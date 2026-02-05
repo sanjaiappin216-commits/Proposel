@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanjai ❤️ Yeswanthi</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  background:linear-gradient(135deg,#ff5f8f,#ff89b5);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+/* COMMON */
+.page{
+  display:none;
+  text-align:center;
+  color:#fff;
+  padding:20px;
+}
+.page.active{display:block}
+
+/* LAMP PAGE */
+.lamp{
+  width:140px;
+  height:180px;
+  background:#222;
+  border-radius:50% 50% 40% 40%;
+  margin:40px auto;
+  box-shadow:inset 0 0 20px #000;
+}
+.lamp.on{
+  background:yellow;
+  box-shadow:0 0 50px yellow;
+}
+.thread{
+  width:4px;
+  height:80px;
+  background:#000;
+  margin:0 auto;
+  cursor:pointer;
+}
+
+/* LOGIN */
+.login-box{
+  background:rgba(255,255,255,0.15);
+  padding:25px;
+  border-radius:15px;
+  max-width:320px;
+  margin:auto;
+  animation:fadeIn 1s ease;
+}
+input{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border:none;
+  border-radius:8px;
+}
+button{
+  padding:12px 25px;
+  border:none;
+  border-radius:25px;
+  cursor:pointer;
+  font-size:16px;
+}
+.error{color:#ffe0e0;font-size:14px}
+
+/* QUESTION PAGE */
+.btns{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  margin-top:30px;
+}
+#yesBtn{
+  background:#ff2d75;
+  color:#fff;
+  box-shadow:0 0 15px #ff2d75;
+  animation:pulse 1.2s infinite;
+}
+#noBtn{
+  background:#555;
+  color:#fff;
+  position:relative;
+}
+
+/* FINAL PAGE */
+.photo-box{
+  width:260px;
+  height:260px;
+  margin:20px auto;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 0 25px rgba(255,255,255,0.4);
+}
+.photo-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.love-message{
+  background:rgba(255,255,255,0.15);
+  padding:20px;
+  border-radius:15px;
+  margin-top:20px;
+  font-size:16px;
+  line-height:1.6;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.1)}
+  100%{transform:scale(1)}
+}
+.heart{
+  position:absolute;
+  color:#fff;
+  animation:float 4s linear infinite;
+}
+@keyframes float{
+  from{bottom:-10px;opacity:1}
+  to{bottom:110%;opacity:0}
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  h1{font-size:26px}
+  h2{font-size:20px}
+  .photo-box{width:220px;height:220px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <h1>Just one moment… 💡</h1>
+  <div class="lamp" id="lamp"></div>
+  <div class="thread" onclick="turnOn()"></div>
+  <p>Pull the thread</p>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <div class="login-box">
+    <h2>Login 💕</h2>
+    <input type="text" id="name" placeholder="Your Name">
+    <input type="date" id="date">
+    <p class="error" id="error"></p>
+    <button onclick="checkLogin()">Enter</button>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+  <h1>Will you marry me? 💍❤️</h1>
+  <div class="btns">
+    <button id="yesBtn" onclick="yesClick()">YES</button>
+    <button id="noBtn" onmouseover="moveNo()">NO</button>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+  <h1>Congratulations!! 🎉</h1>
+  <h2>Now, you are Sanjai's Wife 💖</h2>
+
+  <div class="photo-box">
+    <img src="pic1.jpg">
+  </div>
+
+  <div class="love-message">
+    <!-- EDIT THIS MESSAGE -->
+    From today, it’s not just you and me…  
+    it’s **us**.  
+    <br><br>
+    Nee illaama naan illa.  
+    En life-oda ellaa sandhoshamum  
+    unna oda thaan.  
+    <br><br>
+    Forever & always,  
+    <br>— Sanjai ❤️
+  </div>
+</div>
+
+<script>
+function turnOn(){
+  document.getElementById("lamp").classList.add("on");
+  document.getElementById("bgMusic").play();
+  setTimeout(()=>{
+    showPage(2);
+  },1200);
+}
+
+function checkLogin(){
+  const name=document.getElementById("name").value.toLowerCase();
+  const date=document.getElementById("date").value;
+  const err=document.getElementById("error");
+
+  if(name!=="yeswanthi"){
+    err.innerText="No, she is not Sanjai's wife 😌";
+    return;
+  }
+  if(date!=="2025-12-23"){
+    err.innerText="Love anniversary date kuda theriyala 😅";
+    return;
+  }
+  showPage(3);
+}
+
+function moveNo(){
+  const btn=document.getElementById("noBtn");
+  btn.style.top=Math.random()*200+"px";
+  btn.style.left=Math.random()*200+"px";
+}
+
+function yesClick(){
+  showPage(4);
+  startHearts();
+}
+
+function showPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById("page"+n).classList.add('active');
+}
+
+function startHearts(){
+  setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"%";
+    h.style.fontSize=Math.random()*20+20+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),4000);
+  },300);
+}
+</script>
+
+</body>
+</html>
